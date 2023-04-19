@@ -1,0 +1,25 @@
+name: Rust
+
+on:
+  push:
+    paths-ignore:
+    - 'README.md'
+    - '.github/'
+    branches: "main"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Rust
+        uses: actions/setup-rust@v2
+      - name: Build and publish
+        env:
+          CRATES_IO_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
+        run: |
+          cargo package
+          cargo publish
