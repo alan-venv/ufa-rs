@@ -35,7 +35,7 @@ impl Date {
         let seconds = now.second();
 
         return format!(
-            "{}/{:02}/{:02}T{:02}:{:02}:{:02}.000",
+            "{}-{:02}-{:02}T{:02}:{:02}:{:02}.000",
             year, month, day, hour, minute, seconds
         );
     }
