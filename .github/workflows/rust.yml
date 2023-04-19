@@ -7,21 +7,21 @@ on:
     - '.github/'
     branches: "main"
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
   publish:
+    name: Publish
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Rust
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
           toolchain: stable
-      - name: Build package
-        run: cargo build --release
-      - name: Publish package
+          override: true
+
+      - run: cargo publish --token ${CRATES_TOKEN}
         env:
-          CRATES_IO_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-        run: cargo publish --token $CRATES_IO_TOKEN
+          CRATES_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
