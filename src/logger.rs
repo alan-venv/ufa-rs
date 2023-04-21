@@ -1,6 +1,7 @@
 use chrono::{Datelike, Local, Timelike};
+use std::fmt;
 
-const DEFAULT_COLOR: &str = "\x1B[0m";
+const DEFAULT_STYLE: &str = "\x1B[0m";
 const RED_COLOR: &str = "\x1B[31m";
 const GREEN_COLOR: &str = "\x1B[32m";
 const YELLOW_COLOR: &str = "\x1B[33m";
@@ -12,108 +13,217 @@ const BOLD_TEXT: &str = "\x1B[1m";
 const DIM_TEXT: &str = "\x1B[2m";
 const ITALIC_TEXT: &str = "\x1B[3m";
 const UNDERLINE_TEXT: &str = "\x1B[4m";
-// const REVERSE_VIDEO: &str = "\x1B[7m"; // (swap foreground and background colors).
-// const HIDDEN_TEXT: &str = "\x1B[8m";
+const REVERSE_VIDEO: &str = "\x1B[7m";
+const HIDDEN_TEXT: &str = "\x1B[8m";
 
-pub struct Style {}
+pub trait CustomStr {
+    fn red(&self) -> CustomString;
+    fn green(&self) -> CustomString;
+    fn yellow(&self) -> CustomString;
+    fn blue(&self) -> CustomString;
+    fn magenta(&self) -> CustomString;
+    fn cyan(&self) -> CustomString;
+    fn white(&self) -> CustomString;
+    fn bold(&self) -> CustomString;
+    fn dim(&self) -> CustomString;
+    fn italic(&self) -> CustomString;
+    fn underline(&self) -> CustomString;
+    fn reverse(&self) -> CustomString;
+    fn hidden(&self) -> CustomString;
+}
 
-#[allow(dead_code)]
-impl Style {
-    pub fn red(text: &str) -> String {
-        return format!("{}{}{}", RED_COLOR, text, DEFAULT_COLOR);
+impl CustomStr for str {
+    fn red(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(RED_COLOR),
+        };
+    }
+    fn green(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(GREEN_COLOR),
+        };
+    }
+    fn yellow(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(YELLOW_COLOR),
+        };
+    }
+    fn blue(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(BLUE_COLOR),
+        };
+    }
+    fn magenta(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(MAGENTA_COLOR),
+        };
+    }
+    fn cyan(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(CYAN_COLOR),
+        };
+    }
+    fn white(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(WHITE_COLOR),
+        };
     }
 
-    pub fn green(text: &str) -> String {
-        return format!("{}{}{}", GREEN_COLOR, text, DEFAULT_COLOR);
+    fn bold(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(BOLD_TEXT),
+        };
     }
 
-    pub fn yellow(text: &str) -> String {
-        return format!("{}{}{}", YELLOW_COLOR, text, DEFAULT_COLOR);
+    fn dim(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(DIM_TEXT),
+        };
     }
 
-    pub fn blue(text: &str) -> String {
-        return format!("{}{}{}", BLUE_COLOR, text, DEFAULT_COLOR);
+    fn italic(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(ITALIC_TEXT),
+        };
     }
 
-    pub fn magenta(text: &str) -> String {
-        return format!("{}{}{}", MAGENTA_COLOR, text, DEFAULT_COLOR);
+    fn underline(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(UNDERLINE_TEXT),
+        };
     }
 
-    pub fn cyan(text: &str) -> String {
-        return format!("{}{}{}", CYAN_COLOR, text, DEFAULT_COLOR);
+    fn reverse(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(REVERSE_VIDEO),
+        };
     }
 
-    pub fn white(text: &str) -> String {
-        return format!("{}{}{}", WHITE_COLOR, text, DEFAULT_COLOR);
-    }
-
-    pub fn bold(text: &str) -> String {
-        return format!("{}{}{}", BOLD_TEXT, text, DEFAULT_COLOR);
-    }
-
-    pub fn dim(text: &str) -> String {
-        return format!("{}{}{}", DIM_TEXT, text, DEFAULT_COLOR);
-    }
-
-    pub fn italic(text: &str) -> String {
-        return format!("{}{}{}", ITALIC_TEXT, text, DEFAULT_COLOR);
-    }
-
-    pub fn underline(text: &str) -> String {
-        return format!("{}{}{}", UNDERLINE_TEXT, text, DEFAULT_COLOR);
+    fn hidden(&self) -> CustomString {
+        return CustomString {
+            value: String::from(self),
+            style: String::from(HIDDEN_TEXT),
+        };
     }
 }
 
-pub struct Print {}
+pub struct CustomString {
+    value: String,
+    style: String,
+}
 
-#[allow(dead_code)]
-impl Print {
-    pub fn red(text: &str) {
-        println!("{}", Style::red(text));
+impl CustomString {
+    pub fn red(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(RED_COLOR),
+        };
     }
 
-    pub fn green(text: &str) {
-        println!("{}", Style::green(text));
+    pub fn green(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(GREEN_COLOR),
+        };
     }
 
-    pub fn yellow(text: &str) {
-        println!("{}", Style::yellow(text));
+    pub fn yellow(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(YELLOW_COLOR),
+        };
     }
 
-    pub fn blue(text: &str) {
-        println!("{}", Style::blue(text));
+    pub fn blue(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(BLUE_COLOR),
+        };
     }
 
-    pub fn magenta(text: &str) {
-        println!("{}", Style::magenta(text));
+    pub fn magenta(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(MAGENTA_COLOR),
+        };
     }
 
-    pub fn cyan(text: &str) {
-        println!("{}", Style::cyan(text));
+    pub fn cyan(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(CYAN_COLOR),
+        };
     }
 
-    pub fn white(text: &str) {
-        println!("{}", Style::white(text));
+    pub fn white(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(WHITE_COLOR),
+        };
     }
 
-    pub fn bold(text: &str) {
-        println!("{}", Style::bold(text));
+    pub fn bold(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(BOLD_TEXT),
+        };
     }
 
-    pub fn dim(text: &str) {
-        println!("{}", Style::dim(text));
+    pub fn dim(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(DIM_TEXT),
+        };
     }
 
-    pub fn italic(text: &str) {
-        println!("{}", Style::italic(text));
+    pub fn italic(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(ITALIC_TEXT),
+        };
     }
 
-    pub fn underline(text: &str) {
-        println!("{}", Style::underline(text));
+    pub fn underline(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(UNDERLINE_TEXT),
+        };
+    }
+
+    pub fn reverse(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(REVERSE_VIDEO),
+        };
+    }
+
+    pub fn hidden(&self) -> CustomString {
+        return CustomString {
+            value: format!("{}{}", self.style, self.value),
+            style: String::from(HIDDEN_TEXT),
+        };
     }
 }
 
-fn get_log_prefix() -> String {
+impl fmt::Display for CustomString {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}{}{}", self.style, self.value, DEFAULT_STYLE)
+    }
+}
+
+fn log_prefix() -> CustomString {
     let now = Local::now();
     let year = now.year();
     let month = now.month();
@@ -124,32 +234,32 @@ fn get_log_prefix() -> String {
     return format!(
         "[{:02}/{:02}/{}] [{:02}:{:02}]",
         day, month, year, hour, minute
-    );
+    )
+    .as_str()
+    .white();
 }
 
 pub struct Log {}
 
 impl Log {
     pub fn info(text: &str) {
-        println!("{} [{}] {}", get_log_prefix(), Style::green("INFO"), text);
+        let info = format!("{}{}{}", "[".white(), "INFO".green(), "]".white());
+        println!("{} {} {}", log_prefix(), info, text.white());
     }
 
     pub fn error(text: &str) {
-        println!("{} [{}] {}", get_log_prefix(), Style::red("ERROR"), text);
+        let error = format!("{}{}{}", "[".white(), "ERROR".red(), "]".white());
+        println!("{} {} {}", log_prefix(), error, text.white());
     }
 
     pub fn warning(text: &str) {
-        println!(
-            "{} [{}] {}",
-            get_log_prefix(),
-            Style::yellow("WARNING"),
-            text
-        );
+        let warning = format!("{}{}{}", "[".white(), "WARNING".yellow(), "]".white());
+        println!("{} {} {}", log_prefix(), warning, text.white());
     }
 }
 
 #[cfg(windows)]
-pub fn set_virtual_terminal(use_virtual: bool) -> Result<(), ()> {
+pub fn windows_config(toggle: bool) {
     use winapi::{
         shared::minwindef::DWORD,
         um::{
@@ -168,18 +278,14 @@ pub fn set_virtual_terminal(use_virtual: bool) -> Result<(), ()> {
         let enabled = original_mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING
             == ENABLE_VIRTUAL_TERMINAL_PROCESSING;
 
-        match (use_virtual, enabled) {
-            // not enabled, should be enabled
+        match (toggle, enabled) {
             (true, false) => {
                 SetConsoleMode(handle, ENABLE_VIRTUAL_TERMINAL_PROCESSING | original_mode)
             }
-            // already enabled, should be disabled
             (false, true) => {
                 SetConsoleMode(handle, ENABLE_VIRTUAL_TERMINAL_PROCESSING ^ original_mode)
             }
             _ => 0,
         };
     }
-
-    Ok(())
 }
