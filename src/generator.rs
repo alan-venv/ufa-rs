@@ -25,6 +25,15 @@ impl Date {
         return since_the_epoch.as_millis().to_string();
     }
 
+    pub fn epoch_as_secs() -> String {
+        let start = SystemTime::now();
+        let since_the_epoch = start
+            .duration_since(UNIX_EPOCH)
+            .expect("Time went backwards");
+
+        return since_the_epoch.as_secs().to_string();
+    }
+
     pub fn iso() -> String {
         let now = Local::now();
         let year = now.year();

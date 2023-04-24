@@ -1,6 +1,6 @@
 [package]
 name = "venv_lib"
-version = "0.2.5"
+version = "0.2.6"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/dev-venv/rust-lib"

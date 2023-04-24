@@ -230,10 +230,11 @@ fn log_prefix() -> CustomString {
     let day = now.day();
     let hour = now.hour();
     let minute = now.minute();
+    let second = now.second();
 
     return format!(
-        "[{:02}/{:02}/{}] [{:02}:{:02}]",
-        day, month, year, hour, minute
+        "[{:02}/{:02}/{}] [{:02}:{:02}:{:02}]",
+        day, month, year, hour, minute, second
     )
     .as_str()
     .white();
