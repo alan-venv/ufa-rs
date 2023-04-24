@@ -8,6 +8,7 @@ on:
 
 env:
   CRATES_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
+  CARGO_TERM_COLOR: alway
 
 jobs:
   publish:
