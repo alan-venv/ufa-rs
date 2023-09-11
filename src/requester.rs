@@ -47,6 +47,25 @@ impl Request {
         return handle_response(response);
     }
 
+    pub fn post_form(url: &str, headers: Vec<(&str, &str)>, form: Vec<(&str, &str)>) -> Result<Response, String>{
+        let client = reqwest::blocking::Client::builder()
+            .danger_accept_invalid_certs(true)
+            .build()
+            .unwrap();
+
+        let mut request = client.post(url).form(&form);
+
+        if headers.len() != 0 {
+            for (key, value) in headers {
+                request = request.header(key, value);
+            }
+        }
+
+        let response = request.send();
+
+        return handle_response(response);
+    }
+
     pub fn put(url: &str, headers: Vec<(&str, &str)>, body: String) -> Result<Response, String> {
         let client = reqwest::blocking::Client::builder()
             .danger_accept_invalid_certs(true)
