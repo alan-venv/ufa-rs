@@ -76,7 +76,7 @@ impl Person {
             "Alan", "João", "Fabio", "Emanuel", "Nicolas", "Luiza", "Gabriele",
         ];
         let last_name = vec![
-            "Silva", "Sampaio", "Kalinay", "Alvez", "Katte", "Oliveira", "Peixoto",
+            "Silva", "Sampaio", "Kalinay", "Alvez", "Katte", "Oliveira", "Guedes",
         ];
 
         return format!(
