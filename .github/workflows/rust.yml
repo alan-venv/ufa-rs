@@ -18,12 +18,6 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
-      - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          override: true
-          profile: minimal
-          toolchain: stable
       - name: Build package
         run: cargo build --release
       - name: Publish package
