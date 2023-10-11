@@ -5,16 +5,34 @@ use uuid::Uuid;
 
 pub struct Others {}
 
-#[allow(dead_code)]
 impl Others {
     pub fn guid() -> String {
         return Uuid::new_v4().to_string();
+    }
+
+    pub fn number(min: i64, max: i64) -> String {
+        let mut rng = rand::thread_rng();
+        let number = rng.gen_range(min..max + 1);
+        return format!("{}", number);
+    }
+
+    pub fn digits(size: i128) -> String {
+        let mut rng = rand::thread_rng();
+        let mut min: i128 = 1;
+        let mut max: i128 = 10;
+        let mut i = 1;
+        while i < size && i < 38 {
+            min = min * 10;
+            max = max * 10;
+            i = i + 1;
+        }
+        let number = rng.gen_range(min..max);
+        return format!("{}", number);
     }
 }
 
 pub struct Date {}
 
-#[allow(dead_code)]
 impl Date {
     pub fn epoch_as_ms() -> String {
         let start = SystemTime::now();
@@ -50,16 +68,15 @@ impl Date {
     }
 }
 
-pub struct Document {}
+pub struct Person {}
 
-#[allow(dead_code)]
-impl Document {
+impl Person {
     pub fn name() -> String {
         let first_name = vec![
-            "Alan", "João", "Fabio", "Emanuel", "Luiza", "Gabriele", "Anelise",
+            "Alan", "João", "Fabio", "Emanuel", "Nicolas", "Luiza", "Gabriele",
         ];
         let last_name = vec![
-            "Silva", "Sampaio", "Guedes", "Alvez", "Braga", "Meller", "Oliveira",
+            "Silva", "Sampaio", "Kalinay", "Alvez", "Katte", "Oliveira", "Guedes",
         ];
 
         return format!(
