@@ -5,7 +5,7 @@ on:
       - ".github/**"
       - "**/*.example.txt"
     branches:
-      - main
+      - master
 
 env:
   CRATES_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
