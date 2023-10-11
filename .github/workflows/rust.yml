@@ -4,7 +4,8 @@ on:
       - "README.md"
       - ".github/**"
       - "**/*.example.txt"
-    branches: "main"
+    branches:
+      - main
 
 env:
   CRATES_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
