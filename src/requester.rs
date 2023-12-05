@@ -1,5 +1,3 @@
-pub use serde_json::json;
-
 pub struct Response {
     pub status: String,
     pub body: serde_json::Value,
@@ -47,7 +45,11 @@ impl Request {
         return handle_response(response);
     }
 
-    pub fn post_form(url: &str, headers: Vec<(&str, &str)>, form: Vec<(&str, &str)>) -> Result<Response, String>{
+    pub fn post_form(
+        url: &str,
+        headers: Vec<(&str, &str)>,
+        form: Vec<(&str, &str)>,
+    ) -> Result<Response, String> {
         let client = reqwest::blocking::Client::builder()
             .danger_accept_invalid_certs(true)
             .build()
