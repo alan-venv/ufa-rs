@@ -26,6 +26,7 @@ impl Utils {
         thread::sleep(duration)
     }
 
+    #[cfg(unix)]
     pub fn verify_root() {
         if let Ok(val) = std::fs::metadata("/proc/self").map(|m| m.uid()) {
             if val != 0 {
