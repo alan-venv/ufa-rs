@@ -2,6 +2,7 @@ pub use serde_json::{json, Value};
 
 use base64::{engine::general_purpose, Engine as _};
 use std::io::prelude::*;
+#[cfg(unix)]
 use std::os::unix::fs::MetadataExt;
 use std::str;
 use std::{process, thread, time};
