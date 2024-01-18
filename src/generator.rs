@@ -66,6 +66,18 @@ impl Date {
             year, month, day, hour, minute, seconds
         );
     }
+
+    pub fn yyy_mm_dd() -> String {
+        let now = Local::now();
+        let year = now.year();
+        let month = now.month();
+        let day = now.day();
+
+        return format!(
+            "{}-{:02}-{:02}",
+            year, month, day
+        );
+    }
 }
 
 pub struct Person {}
