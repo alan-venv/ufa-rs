@@ -5,7 +5,7 @@ edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/alan-venv/ufa-rs"
 description = "A small toolkit"
-rust-version = "1.84"
+rust-version = "1.83"
 keywords = ["lib", "utils"]
 
 [dependencies]
