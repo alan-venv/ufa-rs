@@ -1,5 +1,3 @@
-use std::fmt::{Display, Formatter, Result};
-
 const DEFAULT_STYLE: &str = "\x1B[0m";
 const RED_COLOR: &str = "\x1B[31m";
 const GREEN_COLOR: &str = "\x1B[32m";
@@ -16,208 +14,125 @@ const REVERSE_VIDEO: &str = "\x1B[7m";
 const HIDDEN_TEXT: &str = "\x1B[8m";
 
 pub trait CustomStr {
-    fn red(&self) -> CustomString;
-    fn green(&self) -> CustomString;
-    fn yellow(&self) -> CustomString;
-    fn blue(&self) -> CustomString;
-    fn magenta(&self) -> CustomString;
-    fn cyan(&self) -> CustomString;
-    fn white(&self) -> CustomString;
-    fn bold(&self) -> CustomString;
-    fn dim(&self) -> CustomString;
-    fn italic(&self) -> CustomString;
-    fn underline(&self) -> CustomString;
-    fn reverse(&self) -> CustomString;
-    fn hidden(&self) -> CustomString;
+    fn red(&self) -> String;
+    fn green(&self) -> String;
+    fn yellow(&self) -> String;
+    fn blue(&self) -> String;
+    fn magenta(&self) -> String;
+    fn cyan(&self) -> String;
+    fn white(&self) -> String;
+    fn bold(&self) -> String;
+    fn dim(&self) -> String;
+    fn italic(&self) -> String;
+    fn underline(&self) -> String;
+    fn reverse(&self) -> String;
+    fn hidden(&self) -> String;
+}
+
+impl CustomStr for String {
+    fn red(&self) -> String {
+        return format!("{}{}{}", RED_COLOR, self, DEFAULT_STYLE);
+    }
+
+    fn green(&self) -> String {
+        return format!("{}{}{}", GREEN_COLOR, self, DEFAULT_STYLE);
+    }
+
+    fn yellow(&self) -> String {
+        return format!("{}{}{}", YELLOW_COLOR, self, DEFAULT_STYLE);
+    }
+
+    fn blue(&self) -> String {
+        return format!("{}{}{}", BLUE_COLOR, self, DEFAULT_STYLE);
+    }
+
+    fn magenta(&self) -> String {
+        return format!("{}{}{}", MAGENTA_COLOR, self, DEFAULT_STYLE);
+    }
+
+    fn cyan(&self) -> String {
+        return format!("{}{}{}", CYAN_COLOR, self, DEFAULT_STYLE);
+    }
+
+    fn white(&self) -> String {
+        return format!("{}{}{}", WHITE_COLOR, self, DEFAULT_STYLE);
+    }
+
+    fn bold(&self) -> String {
+        return format!("{}{}{}", BOLD_TEXT, self, DEFAULT_STYLE);
+    }
+
+    fn dim(&self) -> String {
+        return format!("{}{}{}", DIM_TEXT, self, DEFAULT_STYLE);
+    }
+
+    fn italic(&self) -> String {
+        return format!("{}{}{}", ITALIC_TEXT, self, DEFAULT_STYLE);
+    }
+
+    fn underline(&self) -> String {
+        return format!("{}{}{}", UNDERLINE_TEXT, self, DEFAULT_STYLE);
+    }
+
+    fn reverse(&self) -> String {
+        return format!("{}{}{}", REVERSE_VIDEO, self, DEFAULT_STYLE);
+    }
+
+    fn hidden(&self) -> String {
+        return format!("{}{}{}", HIDDEN_TEXT, self, DEFAULT_STYLE);
+    }
 }
 
 impl CustomStr for str {
-    fn red(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(RED_COLOR),
-        };
-    }
-    fn green(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(GREEN_COLOR),
-        };
-    }
-    fn yellow(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(YELLOW_COLOR),
-        };
-    }
-    fn blue(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(BLUE_COLOR),
-        };
-    }
-    fn magenta(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(MAGENTA_COLOR),
-        };
-    }
-    fn cyan(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(CYAN_COLOR),
-        };
-    }
-    fn white(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(WHITE_COLOR),
-        };
+    fn red(&self) -> String {
+        return format!("{}{}{}", RED_COLOR, self, DEFAULT_STYLE);
     }
 
-    fn bold(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(BOLD_TEXT),
-        };
+    fn green(&self) -> String {
+        return format!("{}{}{}", GREEN_COLOR, self, DEFAULT_STYLE);
     }
 
-    fn dim(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(DIM_TEXT),
-        };
+    fn yellow(&self) -> String {
+        return format!("{}{}{}", YELLOW_COLOR, self, DEFAULT_STYLE);
     }
 
-    fn italic(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(ITALIC_TEXT),
-        };
+    fn blue(&self) -> String {
+        return format!("{}{}{}", BLUE_COLOR, self, DEFAULT_STYLE);
     }
 
-    fn underline(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(UNDERLINE_TEXT),
-        };
+    fn magenta(&self) -> String {
+        return format!("{}{}{}", MAGENTA_COLOR, self, DEFAULT_STYLE);
     }
 
-    fn reverse(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(REVERSE_VIDEO),
-        };
+    fn cyan(&self) -> String {
+        return format!("{}{}{}", CYAN_COLOR, self, DEFAULT_STYLE);
     }
 
-    fn hidden(&self) -> CustomString {
-        return CustomString {
-            value: String::from(self),
-            style: String::from(HIDDEN_TEXT),
-        };
-    }
-}
-
-pub struct CustomString {
-    value: String,
-    style: String,
-}
-
-impl CustomString {
-    pub fn red(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(RED_COLOR),
-        };
+    fn white(&self) -> String {
+        return format!("{}{}{}", WHITE_COLOR, self, DEFAULT_STYLE);
     }
 
-    pub fn green(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(GREEN_COLOR),
-        };
+    fn bold(&self) -> String {
+        return format!("{}{}{}", BOLD_TEXT, self, DEFAULT_STYLE);
     }
 
-    pub fn yellow(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(YELLOW_COLOR),
-        };
+    fn dim(&self) -> String {
+        return format!("{}{}{}", DIM_TEXT, self, DEFAULT_STYLE);
     }
 
-    pub fn blue(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(BLUE_COLOR),
-        };
+    fn italic(&self) -> String {
+        return format!("{}{}{}", ITALIC_TEXT, self, DEFAULT_STYLE);
     }
 
-    pub fn magenta(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(MAGENTA_COLOR),
-        };
+    fn underline(&self) -> String {
+        return format!("{}{}{}", UNDERLINE_TEXT, self, DEFAULT_STYLE);
     }
 
-    pub fn cyan(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(CYAN_COLOR),
-        };
+    fn reverse(&self) -> String {
+        return format!("{}{}{}", REVERSE_VIDEO, self, DEFAULT_STYLE);
     }
 
-    pub fn white(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(WHITE_COLOR),
-        };
-    }
-
-    pub fn bold(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(BOLD_TEXT),
-        };
-    }
-
-    pub fn dim(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(DIM_TEXT),
-        };
-    }
-
-    pub fn italic(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(ITALIC_TEXT),
-        };
-    }
-
-    pub fn underline(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(UNDERLINE_TEXT),
-        };
-    }
-
-    pub fn reverse(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(REVERSE_VIDEO),
-        };
-    }
-
-    pub fn hidden(&self) -> CustomString {
-        return CustomString {
-            value: format!("{}{}", self.style, self.value),
-            style: String::from(HIDDEN_TEXT),
-        };
-    }
-}
-
-impl Display for CustomString {
-    fn fmt(&self, f: &mut Formatter) -> Result {
-        write!(f, "{}{}{}", self.style, self.value, DEFAULT_STYLE)
+    fn hidden(&self) -> String {
+        return format!("{}{}{}", HIDDEN_TEXT, self, DEFAULT_STYLE);
     }
 }

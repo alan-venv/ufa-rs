@@ -1,6 +1,6 @@
 use crate::generator::date::pattern;
 
-use super::custom::{CustomStr, CustomString};
+use super::custom::CustomStr;
 
 pub fn info(text: &str) {
     let info = format!("{}{}{}", "[".white(), "INFO".green(), "]".white());
@@ -17,6 +17,18 @@ pub fn warning(text: &str) {
     println!("{} {} {}", log_prefix(), warning, text.white());
 }
 
-fn log_prefix() -> CustomString {
+fn log_prefix() -> String {
     return pattern("[%d/%m/%Y] [%H:%M:%S]").as_str().white();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        info("Message");
+        warning("Message");
+        error("Message");
+    }
 }
