@@ -1,5 +1,4 @@
-use chrono::{Datelike, Local, Timelike};
-use std::fmt;
+use std::fmt::{Display, Formatter, Result};
 
 const DEFAULT_STYLE: &str = "\x1B[0m";
 const RED_COLOR: &str = "\x1B[31m";
@@ -217,76 +216,8 @@ impl CustomString {
     }
 }
 
-impl fmt::Display for CustomString {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+impl Display for CustomString {
+    fn fmt(&self, f: &mut Formatter) -> Result {
         write!(f, "{}{}{}", self.style, self.value, DEFAULT_STYLE)
-    }
-}
-
-fn log_prefix() -> CustomString {
-    let now = Local::now();
-    let year = now.year();
-    let month = now.month();
-    let day = now.day();
-    let hour = now.hour();
-    let minute = now.minute();
-    let second = now.second();
-
-    return format!(
-        "[{:02}/{:02}/{}] [{:02}:{:02}:{:02}]",
-        day, month, year, hour, minute, second
-    )
-    .as_str()
-    .white();
-}
-
-pub struct Log {}
-
-impl Log {
-    pub fn info(text: &str) {
-        let info = format!("{}{}{}", "[".white(), "INFO".green(), "]".white());
-        println!("{} {} {}", log_prefix(), info, text.white());
-    }
-
-    pub fn error(text: &str) {
-        let error = format!("{}{}{}", "[".white(), "ERROR".red(), "]".white());
-        println!("{} {} {}", log_prefix(), error, text.white());
-    }
-
-    pub fn warning(text: &str) {
-        let warning = format!("{}{}{}", "[".white(), "WARNING".yellow(), "]".white());
-        println!("{} {} {}", log_prefix(), warning, text.white());
-    }
-}
-
-#[cfg(windows)]
-pub fn windows_config(toggle: bool) {
-    use winapi::{
-        shared::minwindef::DWORD,
-        um::{
-            consoleapi::{GetConsoleMode, SetConsoleMode},
-            processenv::GetStdHandle,
-            winbase::STD_OUTPUT_HANDLE,
-            wincon::ENABLE_VIRTUAL_TERMINAL_PROCESSING,
-        },
-    };
-
-    unsafe {
-        let handle = GetStdHandle(STD_OUTPUT_HANDLE);
-        let mut original_mode: DWORD = 0;
-        GetConsoleMode(handle, &mut original_mode);
-
-        let enabled = original_mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING
-            == ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-
-        match (toggle, enabled) {
-            (true, false) => {
-                SetConsoleMode(handle, ENABLE_VIRTUAL_TERMINAL_PROCESSING | original_mode)
-            }
-            (false, true) => {
-                SetConsoleMode(handle, ENABLE_VIRTUAL_TERMINAL_PROCESSING ^ original_mode)
-            }
-            _ => 0,
-        };
     }
 }
