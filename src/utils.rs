@@ -15,7 +15,7 @@ pub fn check_regex(content: &str, regex: &str) -> bool {
     return regex.is_match(content);
 }
 
-pub fn check_regexes(content: &str, regexes: &[&str]) -> bool {
+pub fn check_regexes(content: &str, regexes: Vec<&str>) -> bool {
     for regex in regexes {
         let regex = Regex::new(regex).unwrap();
         if regex.is_match(content) {
