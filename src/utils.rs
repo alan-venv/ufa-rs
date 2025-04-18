@@ -15,6 +15,16 @@ pub fn check_regex(content: &str, regex: &str) -> bool {
     return regex.is_match(content);
 }
 
+pub fn check_regexes(content: &str, regexes: &[&str]) -> bool {
+    for regex in regexes {
+        let regex = Regex::new(regex).unwrap();
+        if regex.is_match(content) {
+            return true;
+        }
+    }
+    return false;
+}
+
 pub fn struct_to_string<T: Serialize>(value: &T) -> String {
     return serde_json::to_string(&value).unwrap();
 }
