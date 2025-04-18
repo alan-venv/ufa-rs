@@ -4,7 +4,7 @@ use std::thread;
 
 use crate::logger::custom::CustomStr;
 
-pub fn exec(command: &str) {
+pub fn exec_bash(command: &str) {
     Command::new("bash")
         .arg("-c")
         .arg(command)
@@ -12,7 +12,7 @@ pub fn exec(command: &str) {
         .expect("Error while invoking bash command");
 }
 
-pub fn capture(command: &str) -> String {
+pub fn capture_bash(command: &str) -> String {
     let output = Command::new("bash")
         .arg("-c")
         .arg(command)
@@ -23,7 +23,7 @@ pub fn capture(command: &str) -> String {
     return format!("{}{}", stdout, stderr);
 }
 
-pub fn spawn(command: &str) -> String {
+pub fn spawn_bash(command: &str) -> String {
     let mut child = Command::new("bash")
         .arg("-c")
         .arg(command)
@@ -69,18 +69,18 @@ pub fn spawn(command: &str) -> String {
     return format!("{}{}", stdout_output, stderr_output);
 }
 
-pub fn exec_native(command: &str, args: &[&str]) {
+pub fn exec(command: &str, args: &[&str]) {
     Command::new(command).args(args).status().unwrap();
 }
 
-pub fn capture_native(command: &str, args: &[&str]) -> String {
+pub fn capture(command: &str, args: &[&str]) -> String {
     let output = Command::new(command).args(args).output().unwrap();
     let stdout = String::from_utf8_lossy(&output.stdout);
     let stderr = String::from_utf8_lossy(&output.stderr);
     return format!("{}{}", stdout, stderr);
 }
 
-pub fn spawn_native(command: &str, args: &[&str]) -> String {
+pub fn spaw(command: &str, args: &[&str]) -> String {
     let mut child = Command::new(command)
         .args(args)
         .stdout(Stdio::piped())
