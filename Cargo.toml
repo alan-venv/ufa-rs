@@ -1,6 +1,6 @@
 [package]
 name = "ufa"
-version = "1.2.8"
+version = "1.2.9"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/alan-venv/ufa-rs"
