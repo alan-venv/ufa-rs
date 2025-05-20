@@ -4,3 +4,6 @@ pub mod generator;
 pub mod logger;
 pub mod requester;
 pub mod utils;
+
+#[cfg(unix)]
+pub mod unix;
