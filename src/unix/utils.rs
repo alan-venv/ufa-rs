@@ -33,7 +33,7 @@ pub fn create_entrypoint(mut content: EntryPoint) {
         entrypoint_path,
         content.name.replace(" ", "")
     );
-    bash::exec("mkdir", &[&entrypoint_path]);
+    bash::exec("mkdir", &["-p", &entrypoint_path]);
     let file_path = Path::new(entrypoint_file);
     let mut file = File::create(file_path).unwrap();
     file.write_all(content.get_content().as_bytes()).unwrap();
@@ -96,7 +96,7 @@ pub fn remove_from_bashrc(lines: &[&str]) {
     }
 }
 
-pub fn replace_line_into_bashrc(lines: &[&str]) {
+pub fn replace_from_bashrc(lines: &[&str]) {
     remove_from_bashrc(lines);
     add_to_bashrc(lines);
 }
