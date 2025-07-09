@@ -1,4 +1,6 @@
+use serde_json::Value;
+
 pub struct Response {
     pub status: String,
-    pub body: serde_json::Value,
+    pub body: Value,
 }
