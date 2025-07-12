@@ -19,3 +19,7 @@ pub fn parse_file(path: &str) -> Value {
     let content = fs::read_to_string(path).expect("Failed to parse_file");
     return parse_str(&content);
 }
+
+pub fn to_pretty_string(json: Value) -> String {
+    return serde_json::to_string_pretty(&json).expect("Failed to to_pretty_string");
+}
