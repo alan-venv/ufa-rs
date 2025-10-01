@@ -99,13 +99,13 @@ pub fn delete(url: &str, headers: Vec<(&str, &str)>) -> Result<Response, String>
     return handle_response(response);
 }
 
-pub fn patch(url: &str, headers: Vec<(&str, &str)>) -> Result<Response, String> {
+pub fn patch(url: &str, headers: Vec<(&str, &str)>, body: String) -> Result<Response, String> {
     let client = reqwest::blocking::Client::builder()
         .danger_accept_invalid_certs(true)
         .build()
         .unwrap();
 
-    let mut request = client.patch(url);
+    let mut request = client.patch(url).body(body);
 
     if headers.len() != 0 {
         for (key, value) in headers {
