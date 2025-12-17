@@ -44,3 +44,7 @@ pub fn base64_to_file(b64: &str, path: &str, file: &str) {
         .expect("Error decoding base64!");
     file.write_all(&bytes).expect("Error writing to file!");
 }
+
+pub fn text_to_base64(content: &str) -> String {
+    return general_purpose::STANDARD.encode(content.as_bytes());
+}
