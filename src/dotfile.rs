@@ -1,20 +1,24 @@
 use std::env;
 use std::fs;
 
-pub fn load_content(content: &str) {
-    for line in content.lines() {
-        if let Some((key, value)) = line.split_once('=') {
-            unsafe { env::set_var(key.trim(), value.trim()) };
-        }
-    }
+pub fn load() {
+    load_file(".env");
 }
 
-pub fn load_file() {
-    if let Ok(contents) = fs::read_to_string(".env") {
+pub fn load_file(path: &str) {
+    if let Ok(contents) = fs::read_to_string(path) {
         for line in contents.lines() {
             if let Some((key, value)) = line.split_once('=') {
                 unsafe { env::set_var(key.trim(), value.trim()) };
             }
+        }
+    }
+}
+
+pub fn load_content(content: &str) {
+    for line in content.lines() {
+        if let Some((key, value)) = line.split_once('=') {
+            unsafe { env::set_var(key.trim(), value.trim()) };
         }
     }
 }
