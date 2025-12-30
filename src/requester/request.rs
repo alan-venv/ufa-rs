@@ -1,12 +1,20 @@
 use super::models::Response;
 
 pub fn get(url: &str, headers: Vec<(&str, &str)>) -> Result<Response, String> {
+    return get_with_body(url, headers, "".into());
+}
+
+pub fn get_with_body(
+    url: &str,
+    headers: Vec<(&str, &str)>,
+    body: String,
+) -> Result<Response, String> {
     let client = reqwest::blocking::Client::builder()
         .danger_accept_invalid_certs(true)
         .build()
         .unwrap();
 
-    let mut request = client.get(url);
+    let mut request = client.get(url).body(body);
 
     if headers.len() != 0 {
         for (key, value) in headers {
