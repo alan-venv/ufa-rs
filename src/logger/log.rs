@@ -1,4 +1,4 @@
-use crate::generator::date::pattern;
+use chrono::Local;
 
 use super::color::Color;
 
@@ -19,6 +19,11 @@ pub fn warning(text: &str) {
 
 fn log_prefix() -> String {
     return pattern("[%d/%m/%Y] [%H:%M:%S]").as_str().white();
+}
+
+fn pattern(pattern: &str) -> String {
+    let now = Local::now();
+    now.format(pattern).to_string()
 }
 
 #[cfg(test)]
