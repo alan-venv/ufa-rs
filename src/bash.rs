@@ -2,8 +2,6 @@ use std::io::{BufRead, BufReader};
 use std::process::{Command, Stdio};
 use std::thread;
 
-use crate::logger::Color;
-
 pub fn exec_bash(command: &str) {
     Command::new("bash")
         .arg("-c")
@@ -40,7 +38,7 @@ pub fn spawn_bash(command: &str) -> String {
         let mut out = String::new();
         for line in reader.lines() {
             if let Ok(line) = line {
-                println!("{}", line.green());
+                println!("{}", line);
                 out.push_str(&line);
                 out.push('\n');
             }
@@ -53,7 +51,7 @@ pub fn spawn_bash(command: &str) -> String {
         let mut err = String::new();
         for line in reader.lines() {
             if let Ok(line) = line {
-                eprintln!("{}", line.green());
+                eprintln!("{}", line);
                 err.push_str(&line);
                 err.push('\n');
             }
@@ -95,7 +93,7 @@ pub fn spaw(command: &str, args: &[&str]) -> String {
         let mut out = String::new();
         for line in reader.lines() {
             if let Ok(line) = line {
-                println!("{}", line.green());
+                println!("{}", line);
                 out.push_str(&line);
                 out.push('\n');
             }
@@ -108,7 +106,7 @@ pub fn spaw(command: &str, args: &[&str]) -> String {
         let mut err = String::new();
         for line in reader.lines() {
             if let Ok(line) = line {
-                eprintln!("{}", line.green());
+                eprintln!("{}", line);
                 err.push_str(&line);
                 err.push('\n');
             }

@@ -1,4 +1,4 @@
-use rand::Rng;
+use rand::prelude::*;
 use uuid::Uuid;
 
 pub fn uuid() -> String {

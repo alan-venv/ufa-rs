@@ -1,4 +1,4 @@
-use rand::Rng;
+use rand::prelude::*;
 
 pub fn name() -> String {
     let first_name = vec![

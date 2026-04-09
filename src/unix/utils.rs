@@ -6,7 +6,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use crate::{bash, logger::Color};
+use crate::bash;
 
 use super::models::EntryPoint;
 
@@ -23,7 +23,7 @@ pub fn create_entrypoint(mut content: EntryPoint) {
     let user = match env::var("USER") {
         Ok(value) => value,
         Err(_) => {
-            println!("{}", "Could not get the user name".red());
+            println!("{}", "Could not get the user name");
             std::process::exit(0);
         }
     };
@@ -44,7 +44,7 @@ pub fn get_bashrc_path() -> PathBuf {
     let user = match env::var("USER") {
         Ok(value) => value,
         Err(_) => {
-            println!("{}", "Could not get the user name".red());
+            println!("{}", "Could not get the user name");
             std::process::exit(0);
         }
     };
