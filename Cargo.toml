@@ -1,11 +1,11 @@
 [package]
 name = "ufa"
-version = "1.4.3"
+version = "1.4.4"
 edition = "2024"
+rust-version = "1.85"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/alan-venv/ufa-rs"
 description = "A small toolkit"
-rust-version = "1.83"
 keywords = ["lib", "utils"]
 
 [dependencies]
