@@ -2,7 +2,7 @@ use std::io::{BufRead, BufReader};
 use std::process::{Command, Stdio};
 use std::thread;
 
-use crate::logger::custom::CustomStr;
+use crate::logger::Color;
 
 pub fn exec_bash(command: &str) {
     Command::new("bash")

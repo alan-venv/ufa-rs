@@ -6,7 +6,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use crate::{bash, logger::custom::CustomStr};
+use crate::{bash, logger::Color};
 
 use super::models::EntryPoint;
 

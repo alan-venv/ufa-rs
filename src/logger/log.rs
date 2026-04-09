@@ -1,6 +1,6 @@
 use crate::generator::date::pattern;
 
-use super::custom::CustomStr;
+use super::color::Color;
 
 pub fn info(text: &str) {
     let info = format!("{}{}{}", "[".white(), "INFO".green(), "]".white());

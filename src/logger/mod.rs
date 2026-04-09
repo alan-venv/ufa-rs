@@ -1,2 +1,4 @@
-pub mod custom;
+mod color;
 pub mod log;
+
+pub use color::Color;
