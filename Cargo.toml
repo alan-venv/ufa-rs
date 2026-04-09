@@ -1,6 +1,6 @@
 [package]
 name = "ufa"
-version = "1.4.1"
+version = "1.4.2"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/alan-venv/ufa-rs"
@@ -24,7 +24,7 @@ features = ["Win32_Foundation", "Win32_System_Console"]
 optional = true
 
 [features]
-default = ["full"]
+default = []
 full = ["request", "json", "codec", "regex", "generator", "logger"]
 request = ["dep:reqwest", "dep:serde_json"]
 json = ["dep:serde", "dep:serde_json"]
